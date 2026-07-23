@@ -1,0 +1,8 @@
+{
+  "name": "retell-voice-demo",
+  "version": "1.0.0",
+  "description": "Voice agent web demo",
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
