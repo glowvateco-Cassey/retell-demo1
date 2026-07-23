@@ -1,8 +1,8 @@
-const fetch = require('node-fetch');
-
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    res.statusCode = 405;
+    res.setHeader('Content-Type', 'application/json');
+    return res.end(JSON.stringify({ error: 'Method not allowed' }));
   }
 
   try {
@@ -18,13 +18,19 @@ module.exports = async (req, res) => {
     });
 
     const data = await response.json();
-
+    
     if (!response.ok) {
-      return res.status(response.status).json(data);
+      res.statusCode = response.status;
+      res.setHeader('Content-Type', 'application/json');
+      return res.end(JSON.stringify(data));
     }
 
-    return res.status(200).json(data);
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    return res.end(JSON.stringify(data));
   } catch (error) {
-    return res.status(500).json({ error: 'Internal server error' });
+    res.statusCode = 500;
+    res.setHeader('Content-Type', 'application/json');
+    return res.end(JSON.stringify({ error: 'Internal server error' }));
   }
-};
+}
