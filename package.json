@@ -1,5 +1,5 @@
 {
   "name": "retell-voice-demo",
   "version": "1.0.0",
-  "description": "Voice agent web demo"
+  "type": "module"
 }
